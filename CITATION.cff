@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: "Canine-Therapeutic-Delivery-Framework"
+message: "If you use this framework, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: Feeney
+    given-names: Don Michael
+    orcid: "https://orcid.org/0009-0003-1350-4160"
+repository-code: "https://github.com/dfeen87/Canine-Therapeutic-Delivery-Framework"
+license: MIT
+version: "1.0.0"
+date-released: "2026-05-24"
+keywords:
+  - canine longevity
+  - drug delivery
+  - computational pharmacology
+  - PK/PD modeling
+  - genetic algorithms
+  - micro-encapsulation
+  - veterinary therapeutics
+references:
+  - type: dataset
+    title: "AGAT / Vaporix-23 Framework"
+    authors:
+      - family-names: Feeney
+        given-names: Don Michael
+    doi: "10.5281/zenodo.20100907"
+    url: "https://zenodo.org/records/20100907"

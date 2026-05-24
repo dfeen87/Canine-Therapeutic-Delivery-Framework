@@ -1,41 +1,51 @@
-# Project: Phase-Specific Delivery Matrix (Canine Longevity)
-# License: MIT
-# Architect: Don Michael Feeney Jr.
+"""Phase-specific delivery matrix model for GI transit."""
 
-def calculate_peptide_stability(environment_ph, pepsin_concentration, transit_time):
+from __future__ import annotations
+
+from typing import Final
+
+GASTRIC_PH_THRESHOLD: Final[float] = 2.0
+DUODENAL_PH_TRIGGER: Final[float] = 6.5
+
+
+def _validate_ph(value: float) -> None:
+    if not 0.0 <= value <= 14.0:
+        raise ValueError(f"environment_ph must be between 0 and 14 (got {value}).")
+
+
+def _validate_non_negative(name: str, value: float) -> None:
+    if value < 0:
+        raise ValueError(f"{name} must be non-negative (got {value}).")
+
+
+def calculate_peptide_stability(
+    environment_ph: float,
+    pepsin_concentration: float,
+    transit_time: float,
+) -> str:
     """
-    Simulates the structural integrity of the synthetic peptide shield 
-    based on canine gastrointestinal transit variables.
+    Simulate peptide shield integrity across gastric and duodenal phases.
+
+    Transit time is validated for scientific completeness but not used in the
+    simplified gating logic.
     """
-    # Canine Gastric Baseline (Highly Acidic)
-    gastric_ph_threshold = 2.0
-    
-    # Canine Duodenum Baseline (Alkaline Gating Trigger)
-    duodenal_ph_trigger = 6.5
-    
-    # Matrix Status Flags
-    shield_intact = True
-    api_released = False
-    
-    if environment_ph <= gastric_ph_threshold and pepsin_concentration > 0:
-        # Zwitterionic matrix repels protein binding; shield remains folded
-        shield_intact = True
-        api_released = False
+    _validate_ph(environment_ph)
+    _validate_non_negative("pepsin_concentration", pepsin_concentration)
+    _validate_non_negative("transit_time", transit_time)
+
+    if environment_ph <= GASTRIC_PH_THRESHOLD and pepsin_concentration > 0:
         return "Transit Status: Gastric Phase. Shield Intact. API Protected."
-        
-    elif environment_ph >= duodenal_ph_trigger:
-        # Alkaline environment triggers conformational uncoiling
-        shield_intact = False
-        api_released = True
-        return "Transit Status: Duodenal Phase. Shield Uncoiled. API Released for Absorption."
-        
-    else:
-        return "Transit Status: Intermediate Phase. Matrix Stabilized."
 
-# Simulation: Entering the Duodenum
-current_status = calculate_peptide_stability(
-    environment_ph=6.8, 
-    pepsin_concentration=0.1, 
-    transit_time=120
-)
-print(current_status)
+    if environment_ph >= DUODENAL_PH_TRIGGER:
+        return "Transit Status: Duodenal Phase. Shield Uncoiled. API Released for Absorption."
+
+    return "Transit Status: Intermediate Phase. Matrix Stabilized."
+
+
+if __name__ == "__main__":
+    current_status = calculate_peptide_stability(
+        environment_ph=6.8,
+        pepsin_concentration=0.1,
+        transit_time=120,
+    )
+    print(current_status)

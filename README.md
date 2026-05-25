@@ -8,7 +8,8 @@ Built for translational teams advancing **veterinary pharmacology**, **drug‑de
 
 ---
 
-Public Overview  
+Public Overview:  
+
 A narrative, non‑technical summary of this framework is available as a LinkedIn article:
 From Lab to Bowl: Solving the Pharmacokinetic Hurdle in Canine Healthspan Expansion — [LinkedIn Article](https://www.linkedin.com/pulse/from-lab-bowl-solving-pharmacokinetic-hurdle-canine-feeney-jr-pyile/)
 
